@@ -81,7 +81,19 @@ namespace Projeto_Hospital
 
         static void Agravantes()
         {
-            string diabetes, hipertensão, obesidade;
+            string diabetes, hipertensão, obesidade,doenca_respiratoria, fumante;
+
+            Console.WriteLine("Informe se o paciente tem diabates: ");
+            diabetes = Console.ReadLine();
+            Console.WriteLine("Informe se o paciente tem obesidade: ");
+            obesidade = Console.ReadLine();
+            Console.WriteLine("Informe se o paciente tem hipertensão: ");
+            hipertensão = Console.ReadLine();
+            Console.WriteLine("Informe se o paciente tem alguma doença respiratória: ");
+            doenca_respiratoria = Console.ReadLine();
+            Console.WriteLine("Informe se o paciente é fumante: ");
+            fumante = Console.ReadLine();
+
         }
     }
 }
