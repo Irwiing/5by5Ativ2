@@ -21,13 +21,13 @@ namespace ControleCovid
                 "\nCPF: " + Cpf + "\nSexo: " + Sexo;
         }
 
-        public void CalculaIdade()
+        public int CalculaIdade()
         {
             var birthdate = DataNascimento;
             var today = DateTime.Now;
             var age = today.Year - birthdate.Year;
             if (birthdate > today.AddYears(-age)) age--;
-            Console.WriteLine(age);
+            return age;
         }
     }
 }

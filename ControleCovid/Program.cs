@@ -6,31 +6,38 @@ using System.Threading.Tasks;
 
 namespace ControleCovid
 {
-    
+
     class Program
     {
-        
+
         static void Main(string[] args)
         {
+            FilaPreferencial filaP = new FilaPreferencial
+            {
+                Tail = null,
+                Head = null
+            };
+
             FilaChegada fila = new FilaChegada
             {
                 Tail = null,
                 Head = null,
             };
-            
 
-            MenuFilaChegada(fila);
+
+            MenuFilaChegada(fila, filaP);
             Console.WriteLine("Pressione qualquer tecla para sair...");
             Console.ReadKey();
         }
-        
-        static void MenuFilaChegada(FilaChegada fila)
+
+        static void MenuFilaChegada(FilaChegada fila, FilaPreferencial filaP)
         {
             string escolha;
 
             Console.WriteLine("Informe o que você deseja: ");
             do
             {
+                
                 Console.WriteLine("\n1)Cadastrar paciente: " +
                                   "\n2)Mostrar Fila do atendimento inicial: " +
                                   "\n3)Procurar Pessoas por ID: " +
@@ -39,36 +46,46 @@ namespace ControleCovid
                                   "\n6)Mostrar Internações" +
                                   "\n7)Sair do programa!");
                 escolha = Console.ReadLine();
+                Console.Clear();
 
                 switch (escolha)
                 {
                     case "1":
+
+                        Pessoa p = DadosPaciente();
+                        if (p.CalculaIdade() >= 60)
                         {
-                            
-                            Pessoa p = DadosPaciente();
-                            fila.Push(p);                            
-                            break;
+                            filaP.Push(p);
                         }
+                        else
+                        {
+                            fila.Push(p);
+                        }
+
+                        break;
+
                     case "2":
-                        {
-                            break;
-                        }
+
+
+                        filaP.Imprimir();
+                        break;
+
                     case "3":
-                        {
-                            break;
-                        }
+                        fila.Imprimir();
+                        break;
+
                     case "4":
-                        {
-                            break;
-                        }
+
+                        break;
+
                     case "5":
-                        {
-                            break;
-                        }
+
+                        break;
+
                     case "6":
-                        {
-                            break;
-                        }
+
+                        break;
+
                 }
 
             } while (escolha != "7");
@@ -104,7 +121,7 @@ namespace ControleCovid
 
         static void Agravantes()
         {
-            string diabetes, hipertensão, obesidade,doenca_respiratoria, fumante;
+            string diabetes, hipertensão, obesidade, doenca_respiratoria, fumante;
 
             Console.WriteLine("Informe se o paciente tem diabates: ");
             diabetes = Console.ReadLine();

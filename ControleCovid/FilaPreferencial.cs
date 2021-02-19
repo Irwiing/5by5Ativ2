@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ControleCovid
 {
-    class FilaChegada
+    class FilaPreferencial
     {
         public Pessoa Head { get; set; }
         public Pessoa Tail { get; set; }
@@ -15,13 +15,12 @@ namespace ControleCovid
 
         public bool Vazia()
         {
-            if(Head == null && Tail == null)
+            if (Head == null && Tail == null)
             {
                 return true;
             }
             return false;
         }
-
         public void Push(Pessoa aux)
         {
             if (Vazia())
@@ -32,29 +31,28 @@ namespace ControleCovid
             else
             {
                 Tail.Proximo = aux;
-                Tail = aux;                
+                Tail = aux;
             }
-            Console.WriteLine("\nDados do paciente inserido com sucesso!!!\n");
+            Console.WriteLine("\nDados do paciente preferencial inserido com sucesso!!!\n");
             Cont++;
         }
-
         public Pessoa Pop()
         {
             Pessoa aux = Head;
             if (Vazia())
             {
-                Console.WriteLine("A fila está vazia!");
-                
+                Console.WriteLine("A fila preferencial está vazia!");
+
             }
             else
-            {               
+            {
                 Head = Head.Proximo;
-                Console.WriteLine("\nPaciente transferido de fila\n");
+                Console.WriteLine("\nPaciente preferencial transferido de fila\n");
                 Cont--;
             }
             return aux;
 
-            
+
         }
 
         public void Imprimir()
@@ -62,17 +60,19 @@ namespace ControleCovid
             if (Vazia())
             {
                 Console.WriteLine("\nA fila presencial está vazia!\n");
+                Console.ReadKey();
             }
             else
             {
                 Pessoa aux = Head;
                 do
                 {
-                    Console.WriteLine("\n" + aux.ToString() + "\n");
+                    Console.WriteLine("\n"+aux.ToString()+"\n");
                     aux = aux.Proximo;
-                } while (aux != null);
 
+                } while (aux != null);
             }
         }
+
     }
 }
