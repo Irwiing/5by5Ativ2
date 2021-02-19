@@ -4,18 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projeto_Hospital
+namespace ControleCovid
 {
+    
     class Program
     {
+        
         static void Main(string[] args)
         {
-            Menu_Fila_Chegada();
+            
+
+            MenuFilaChegada();
             Console.WriteLine("Pressione qualquer tecla para sair...");
             Console.ReadKey();
         }
-
-        static void Menu_Fila_Chegada()
+        
+        static void MenuFilaChegada()
         {
             string escolha;
 
@@ -35,7 +39,8 @@ namespace Projeto_Hospital
                 {
                     case "1":
                         {
-                            Dados_Paciente();
+                            
+                            DadosPaciente();
                             break;
                         }
                     case "2":
@@ -63,12 +68,15 @@ namespace Projeto_Hospital
             } while (escolha != "7");
         }
 
-        static void Dados_Paciente()
+        static Pessoa DadosPaciente()
         {
+            int id;
             string nome, sexo;
             long cpf;
             DateTime data_nascimento;
 
+            Console.WriteLine("Informe o ID do paciente: ");
+            id = int.Parse(Console.ReadLine());
             Console.WriteLine("Informe o nome do paciente: ");
             nome = Console.ReadLine();
             Console.WriteLine("Informe o sexo do paciente: ");
@@ -77,6 +85,15 @@ namespace Projeto_Hospital
             cpf = long.Parse(Console.ReadLine());
             Console.WriteLine("Informe a data de nascimento do paciente: ");
             data_nascimento = DateTime.Parse(Console.ReadLine());
+
+            return new Pessoa
+            {
+                Id = id,
+                Nome = nome,
+                Sexo = sexo,
+                Cpf = cpf,
+                DataNascimento = data_nascimento,
+            };
         }
 
         static void Agravantes()
