@@ -61,8 +61,11 @@ namespace ControleCovid
                         break;
 
                     case "2":
+                        Console.WriteLine("\nLista de espera\n");
                         filaP.Imprimir();
                         fila.Imprimir();
+
+                        Console.WriteLine("\nPressione qualquer tecla voltar ao menu principal...");
                         Console.ReadKey();
                         break;
 
@@ -107,6 +110,9 @@ namespace ControleCovid
 
                         Console.WriteLine("QUARENTENA");
                         filaQuarentena.Imprimir();
+
+                        Console.WriteLine("\nPressione qualquer tecla voltar ao menu principal...");
+                        Console.ReadKey();
                         break;
 
                     case "5": // IMPRESSAO SEM COVID
@@ -178,9 +184,18 @@ namespace ControleCovid
             int diasSintomas, status;
             bool agravante;
 
+            Console.WriteLine(p.ToString() + "\n");
 
             Console.WriteLine("A quantos dias o paciente percebeu os sintomas: ");
             diasSintomas = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("O paciente possui agravantes 0(Não) ou 1(Sim): ");
+            if (int.Parse(Console.ReadLine()) == 0) // ALTERAR 
+            {
+                agravante = false; // ALTERAR 
+            }
+            else
+                agravante = true; // ALTERAR 
 
             Console.WriteLine("Qual fila o paciente será mandado " +
                               "\n1)Quarentena" +
@@ -188,12 +203,7 @@ namespace ControleCovid
                               "\n3)Sem Covid-19 ");
             status = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("O paciente possui agravantes 0(Não) ou 1(Sim): ");
-            if(int.Parse(Console.ReadLine()) == 0)
-            {
-                agravante = false;
-            }else
-                agravante = true;
+            
 
 
             p.fichaDoencas = new FichaDoencas

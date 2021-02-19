@@ -72,6 +72,7 @@ namespace ControleCovid
                 } while (aux != null);
 
             }
+
         }
     }
 }
