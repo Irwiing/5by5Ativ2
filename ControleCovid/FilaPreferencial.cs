@@ -47,11 +47,12 @@ namespace ControleCovid
             else
             {
                 Head = Head.Proximo;
+                if (Head == null)
+                    Tail = null;
                 Console.WriteLine("\nPaciente preferencial transferido de fila\n");
                 Cont--;
             }
             return aux;
-
 
         }
 
@@ -65,6 +66,7 @@ namespace ControleCovid
             else
             {
                 Pessoa aux = Head;
+                Console.WriteLine("\tFila Preferencial");
                 do
                 {
                     Console.WriteLine("\n"+aux.ToString()+"\n");

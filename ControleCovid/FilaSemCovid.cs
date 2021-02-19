@@ -47,6 +47,8 @@ namespace ControleCovid
             else
             {
                 Head = Head.Proximo;
+                if (Head == null)
+                    Tail = null;
                 Cont--;
             }
             return aux;

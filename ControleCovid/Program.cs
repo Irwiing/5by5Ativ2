@@ -12,6 +12,9 @@ namespace ControleCovid
 
         static void Main(string[] args)
         {
+            string escolha;
+            int contador = 0;
+
             FilaPreferencial filaP = new FilaPreferencial
             {
                 Tail = null,
@@ -24,29 +27,27 @@ namespace ControleCovid
                 Head = null,
             };
 
-
-            MenuFilaChegada(fila, filaP);
-            Console.WriteLine("Pressione qualquer tecla para sair...");
-            Console.ReadKey();
-        }
-
-        static void MenuFilaChegada(FilaChegada fila, FilaPreferencial filaP)
-        {
-            string escolha;
-
-            Console.WriteLine("Informe o que você deseja: ");
-            do
+            FilaSemCovid filaSemCovid = new FilaSemCovid
             {
-                
-                Console.WriteLine("\n1)Cadastrar paciente: " +
-                                  "\n2)Mostrar Fila do atendimento inicial: " +
-                                  "\n3)Procurar Pessoas por ID: " +
-                                  "\n4)Mostrar fila com pacientes com Covid-19" +
-                                  "\n5)Mostrar fila com pacientes sem Covid 19" +
-                                  "\n6)Mostrar Internações" +
-                                  "\n7)Sair do programa!");
-                escolha = Console.ReadLine();
-                Console.Clear();
+                Tail = null,
+                Head = null,
+            };
+
+            FilaQuarentena filaQuarentena = new FilaQuarentena
+            {
+                Tail = null,
+                Head = null,
+            };
+
+            FilaInternada filaInternado = new FilaInternada
+            {
+                Tail = null,
+                Head = null,
+            };
+
+            do {
+
+                escolha = MenuFilaChegada();
 
                 switch (escolha)
                 {
@@ -54,32 +55,67 @@ namespace ControleCovid
 
                         Pessoa p = DadosPaciente();
                         if (p.CalculaIdade() >= 60)
-                        {
                             filaP.Push(p);
-                        }
                         else
-                        {
                             fila.Push(p);
-                        }
                         break;
 
                     case "2":
-                        Console.WriteLine("\tFila Preferencial");
+
+                        Console.WriteLine("Fila Preferencial");
                         filaP.Imprimir();
 
-                        Console.WriteLine("\tFila normal");
+                        Console.WriteLine("Fila Normal");
                         fila.Imprimir();
                         break;
 
                     case "3":
-                        CadastrarDoencas();
+                        Pessoa pP;
+                        if (contador < 2 && !(filaP.Vazia()))
+                        {
+                            // IDOSO
+                            pP = filaP.Pop();
+                            CadastrarDoencas(pP);
+
+                            contador++;
+                        }
+                        else
+                        {
+                            pP = fila.Pop();
+                            CadastrarDoencas(pP);
+
+                            // NORMAL
+                            contador = 0;
+                        }
+
+                        switch (pP.fichaDoencas.Status)
+                        {
+                            case 1: // FILA QUARENTENA
+                                filaQuarentena.Push(pP);
+                                break;
+                            case 2: // FILA INTERNADOS
+                                filaInternado.Push(pP);
+
+                                break;
+                            case 3: // FILA SEM COVID
+                                filaSemCovid.Push(pP);
+
+                                break;
+                        }
                         break;
 
-                    case "4":
+                    case "4": // IMPRESSAO COM COVID
 
+                        Console.WriteLine("INTERNADOS");
+                        filaInternado.Imprimir();
+
+                        Console.WriteLine("QUARENTENA");
+                        filaQuarentena.Imprimir();
                         break;
 
-                    case "5":
+                    case "5": // IMPRESSAO SEM COVID
+
+                        filaSemCovid.Imprimir();
 
                         break;
 
@@ -89,7 +125,28 @@ namespace ControleCovid
 
                 }
 
-            } while (escolha != "7");
+            } while (escolha != "0");
+
+            Console.WriteLine("Pressione qualquer tecla para sair...");
+            Console.ReadKey();
+        }
+
+        static string MenuFilaChegada()
+        {
+            string escolha;
+
+            Console.WriteLine("Informe o que você deseja: ");
+           
+            Console.WriteLine("\n1)Cadastrar paciente: " +
+                              "\n2)Mostrar Fila do atendimento inicial: " +
+                              "\n3)Cadastro de ficha médica" +
+                              "\n4)Mostrar fila com pacientes com Covid-19" +
+                              "\n5)Mostrar fila com pacientes sem Covid 19" +
+                              "\n6)Relatório" +
+                              "\n7)Procurar Pessoas por ID: (EM MANUTENÇÃO)" +
+                              "\n0)Sair do programa!");
+            escolha = Console.ReadLine();
+            return escolha;
         }
 
         static Pessoa DadosPaciente()
@@ -120,10 +177,11 @@ namespace ControleCovid
             };
         }
 
-        static FichaDoencas CadastrarDoencas(Pessoa p)
+        static void CadastrarDoencas(Pessoa p)
         {
             int diasSintomas, status;
             bool agravante;
+
 
             Console.WriteLine("A quantos dias o paciente percebeu os sintomas: ");
             diasSintomas = int.Parse(Console.ReadLine());
@@ -135,7 +193,12 @@ namespace ControleCovid
             status = int.Parse(Console.ReadLine());
 
             Console.WriteLine("O paciente possui agravantes 0(Não) ou 1(Sim): ");
-            agravante = bool.Parse(Console.ReadLine());
+            if(int.Parse(Console.ReadLine()) == 0)
+            {
+                agravante = false;
+            }else
+                agravante = true;
+
 
             p.fichaDoencas = new FichaDoencas
             {
@@ -144,15 +207,8 @@ namespace ControleCovid
                 Status = status
             };
 
-            switch (status)
-            {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-            }
+            
+
             /*string diabetes, hipertensão, obesidade, doenca_respiratoria, fumante;
 
             Console.WriteLine("Informe se o paciente tem diabates: ");
