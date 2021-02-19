@@ -12,14 +12,19 @@ namespace ControleCovid
         
         static void Main(string[] args)
         {
+            FilaChegada fila = new FilaChegada
+            {
+                Tail = null,
+                Head = null,
+            };
             
 
-            MenuFilaChegada();
+            MenuFilaChegada(fila);
             Console.WriteLine("Pressione qualquer tecla para sair...");
             Console.ReadKey();
         }
         
-        static void MenuFilaChegada()
+        static void MenuFilaChegada(FilaChegada fila)
         {
             string escolha;
 
@@ -40,7 +45,8 @@ namespace ControleCovid
                     case "1":
                         {
                             
-                            DadosPaciente();
+                            Pessoa p = DadosPaciente();
+                            fila.Push(p);                            
                             break;
                         }
                     case "2":
