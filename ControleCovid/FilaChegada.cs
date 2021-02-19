@@ -34,7 +34,7 @@ namespace ControleCovid
                 Tail.Proximo = aux;
                 Tail = aux;                
             }
-            Console.WriteLine("\nDados do paciente inserido com sucesso!!!\n");
+            Console.WriteLine("\nDados do paciente inserido na fila normal com sucesso!!!\n");
             Cont++;
         }
 
@@ -61,7 +61,7 @@ namespace ControleCovid
         {
             if (Vazia())
             {
-                Console.WriteLine("\nA fila presencial está vazia!\n");
+                Console.WriteLine("\nA fila de chegada normal está vazia!\n");
             }
             else
             {
