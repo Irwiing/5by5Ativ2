@@ -43,11 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FichaDoencas.cs" />
     <Compile Include="FilaChegada.cs" />
+    <Compile Include="FilaInternada.cs" />
     <Compile Include="FilaPreferencial.cs" />
+    <Compile Include="FilaQuarentena.cs" />
     <Compile Include="Pessoa.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FilaSemCovid.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

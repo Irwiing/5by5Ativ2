@@ -61,17 +61,18 @@ namespace ControleCovid
                         {
                             fila.Push(p);
                         }
-
                         break;
 
                     case "2":
-
-
+                        Console.WriteLine("\tFila Preferencial");
                         filaP.Imprimir();
+
+                        Console.WriteLine("\tFila normal");
+                        fila.Imprimir();
                         break;
 
                     case "3":
-                        fila.Imprimir();
+                        CadastrarDoencas();
                         break;
 
                     case "4":
@@ -119,9 +120,40 @@ namespace ControleCovid
             };
         }
 
-        static void Agravantes()
+        static FichaDoencas CadastrarDoencas(Pessoa p)
         {
-            string diabetes, hipertensão, obesidade, doenca_respiratoria, fumante;
+            int diasSintomas, status;
+            bool agravante;
+
+            Console.WriteLine("A quantos dias o paciente percebeu os sintomas: ");
+            diasSintomas = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Qual fila o paciente será mandado " +
+                              "\n1)Quarentena" +
+                              "\n2)Internados" +
+                              "\n3)Sem Covid-19 ");
+            status = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("O paciente possui agravantes 0(Não) ou 1(Sim): ");
+            agravante = bool.Parse(Console.ReadLine());
+
+            p.fichaDoencas = new FichaDoencas
+            {
+                Agravante = agravante,
+                DiasSintomas = diasSintomas, 
+                Status = status
+            };
+
+            switch (status)
+            {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
+            /*string diabetes, hipertensão, obesidade, doenca_respiratoria, fumante;
 
             Console.WriteLine("Informe se o paciente tem diabates: ");
             diabetes = Console.ReadLine();
@@ -132,8 +164,11 @@ namespace ControleCovid
             Console.WriteLine("Informe se o paciente tem alguma doença respiratória: ");
             doenca_respiratoria = Console.ReadLine();
             Console.WriteLine("Informe se o paciente é fumante: ");
-            fumante = Console.ReadLine();
+            fumante = Console.ReadLine();*/
 
+            return;
         }
+
+
     }
 }

@@ -59,7 +59,7 @@ namespace ControleCovid
         {
             if (Vazia())
             {
-                Console.WriteLine("\nA fila presencial está vazia!\n");
+                Console.WriteLine("\nA fila preferencial está vazia!\n");
                 Console.ReadKey();
             }
             else

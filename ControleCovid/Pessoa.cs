@@ -14,6 +14,7 @@ namespace ControleCovid
         public long Cpf { get; set; }
         public string Sexo { get; set; }
         public Pessoa Proximo { get; set; }
+        public FichaDoencas fichaDoencas { get; set; }
 
         public override string ToString()
         {
