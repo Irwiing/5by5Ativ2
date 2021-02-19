@@ -61,12 +61,9 @@ namespace ControleCovid
                         break;
 
                     case "2":
-
-                        Console.WriteLine("Fila Preferencial");
                         filaP.Imprimir();
-
-                        Console.WriteLine("Fila Normal");
                         fila.Imprimir();
+                        Console.ReadKey();
                         break;
 
                     case "3":
@@ -76,7 +73,6 @@ namespace ControleCovid
                             // IDOSO
                             pP = filaP.Pop();
                             CadastrarDoencas(pP);
-
                             contador++;
                         }
                         else
@@ -134,7 +130,7 @@ namespace ControleCovid
         static string MenuFilaChegada()
         {
             string escolha;
-
+            Console.Clear();
             Console.WriteLine("Informe o que você deseja: ");
            
             Console.WriteLine("\n1)Cadastrar paciente: " +

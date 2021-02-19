@@ -61,7 +61,6 @@ namespace ControleCovid
             if (Vazia())
             {
                 Console.WriteLine("\nA fila preferencial está vazia!\n");
-                Console.ReadKey();
             }
             else
             {

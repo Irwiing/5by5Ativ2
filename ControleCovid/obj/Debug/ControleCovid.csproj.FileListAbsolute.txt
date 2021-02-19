@@ -12,3 +12,10 @@ C:\Users\LuizSena\source\repos\Corona\ControleCovid\obj\Debug\ControleCovid.cspr
 C:\Users\LuizSena\source\repos\Corona\ControleCovid\obj\Debug\ControleCovid.csproj.CoreCompileInputs.cache
 C:\Users\LuizSena\source\repos\Corona\ControleCovid\obj\Debug\ControleCovid.exe
 C:\Users\LuizSena\source\repos\Corona\ControleCovid\obj\Debug\ControleCovid.pdb
+C:\Users\Irwilha\Documents\LearnSpace\ControleCovid\ControleCovid\bin\Debug\ControleCovid.exe.config
+C:\Users\Irwilha\Documents\LearnSpace\ControleCovid\ControleCovid\bin\Debug\ControleCovid.exe
+C:\Users\Irwilha\Documents\LearnSpace\ControleCovid\ControleCovid\bin\Debug\ControleCovid.pdb
+C:\Users\Irwilha\Documents\LearnSpace\ControleCovid\ControleCovid\obj\Debug\ControleCovid.csprojAssemblyReference.cache
+C:\Users\Irwilha\Documents\LearnSpace\ControleCovid\ControleCovid\obj\Debug\ControleCovid.csproj.CoreCompileInputs.cache
+C:\Users\Irwilha\Documents\LearnSpace\ControleCovid\ControleCovid\obj\Debug\ControleCovid.exe
+C:\Users\Irwilha\Documents\LearnSpace\ControleCovid\ControleCovid\obj\Debug\ControleCovid.pdb
