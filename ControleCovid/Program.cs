@@ -47,6 +47,9 @@ namespace ControleCovid
                 Tail = null,
                 Head = null,
             };
+
+            IniciaFilas(filaChegadaPreferencial, filaChegada, filaSemCovid, filaQuarentena, filaInternado);
+
             do {
 
 
@@ -59,7 +62,7 @@ namespace ControleCovid
                         Pessoa p = DadosPaciente();
                         if (p.CalculaIdade() >= 60)
                         {
-                            using (StreamWriter filaChegadaPreferencialWriter = new StreamWriter("FilaChegadaPreferencial.cvs", true)) 
+                            using (StreamWriter filaChegadaPreferencialWriter = new StreamWriter("FilaChegadaPreferencial.csv", true)) 
                             { 
                                 filaChegadaPreferencial.Push(p);
                                 filaChegadaPreferencialWriter.WriteLine(p.ConverterCSV());                                
@@ -67,7 +70,7 @@ namespace ControleCovid
                         }
                         else 
                         {
-                            using (StreamWriter filaChegadaWriter = new StreamWriter("filachegada.cvs", true)) { 
+                            using (StreamWriter filaChegadaWriter = new StreamWriter("FilaChegada.csv", true)) { 
                                 filaChegada.Push(p);
                                 filaChegadaWriter.WriteLine(p.ConverterCSV());
                             };
@@ -95,36 +98,35 @@ namespace ControleCovid
                         }
                         else
                         {
-                            StreamReader filaChegadaReader = new StreamReader("filachegada.csv", Encoding.UTF8);
-                            string ler = filaChegadaReader.ReadToEnd();
-                            
+                            // NORMAL
+                          //  using(StreamReader filaChegadaReader = new StreamReader("FilaChegada.csv"))
+                           // {
                                 pP = filaChegada.Pop();
                                 CadastrarDoencas(pP);
-                                Console.WriteLine(ler);
-                                filaChegadaReader.Close();
-                            
-                            // NORMAL
-                            contador = 0;
+                            //    Console.WriteLine(filaChegadaReader.ReadLine());
+                                Console.ReadKey();
+                                contador = 0;
+                          //  }
                         }
 
                         switch (pP.fichaDoencas.Status)
                         {
                             case 1: // FILA QUARENTENA
-                                using (StreamWriter filaQuarentenaWriter = new StreamWriter("filaQuarentena.cvs", true))
+                                using (StreamWriter filaQuarentenaWriter = new StreamWriter("filaQuarentena.csv", true))
                                 {
                                     filaQuarentena.Push(pP);
                                     filaQuarentenaWriter.WriteLine(pP.ConverterCSV());
                                 }
                                 break;
                             case 2: // FILA INTERNADOS
-                                using (StreamWriter filaInternadoWriter = new StreamWriter("filaInternado.cvs", true))
+                                using (StreamWriter filaInternadoWriter = new StreamWriter("filaInternado.csv", true))
                                 {
                                     filaInternado.Push(pP);
                                     filaInternadoWriter.WriteLine(pP.ConverterCSV());
                                 }
                                 break;
                             case 3: // FILA SEM COVID
-                                using (StreamWriter filaSemCovidWriter = new StreamWriter("filaSemCovid.cvs", true))
+                                using (StreamWriter filaSemCovidWriter = new StreamWriter("filaSemCovid.csv", true))
                                 {
                                     filaSemCovid.Push(pP);
                                     filaSemCovidWriter.WriteLine(pP.ConverterCSV());
@@ -260,7 +262,9 @@ namespace ControleCovid
 
             return;
         }
-
+        static void IniciaFilas() 
+        { 
+        }
 
     }
 }
