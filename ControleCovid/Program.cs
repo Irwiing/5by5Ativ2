@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ControleCovid
 {
-
     class Program
     {
 
@@ -14,14 +14,17 @@ namespace ControleCovid
         {
             string escolha;
             int contador = 0;
+            
+           
+            
 
-            FilaPreferencial filaP = new FilaPreferencial
+            FilaPreferencial filaChegadaPreferencial = new FilaPreferencial
             {
                 Tail = null,
                 Head = null
             };
 
-            FilaChegada fila = new FilaChegada
+            FilaChegada filaChegada = new FilaChegada
             {
                 Tail = null,
                 Head = null,
@@ -44,8 +47,8 @@ namespace ControleCovid
                 Tail = null,
                 Head = null,
             };
-
             do {
+
 
                 escolha = MenuFilaChegada();
 
@@ -55,15 +58,27 @@ namespace ControleCovid
 
                         Pessoa p = DadosPaciente();
                         if (p.CalculaIdade() >= 60)
-                            filaP.Push(p);
-                        else
-                            fila.Push(p);
+                        {
+                            using (StreamWriter filaChegadaPreferencialWriter = new StreamWriter("FilaChegadaPreferencial.cvs", true)) 
+                            { 
+                                filaChegadaPreferencial.Push(p);
+                                filaChegadaPreferencialWriter.WriteLine(p.ConverterCSV());                                
+                            }
+                        }
+                        else 
+                        {
+                            using (StreamWriter filaChegadaWriter = new StreamWriter("filachegada.cvs", true)) { 
+                                filaChegada.Push(p);
+                                filaChegadaWriter.WriteLine(p.ConverterCSV());
+                            };
+                            
+                        }
                         break;
 
                     case "2":
                         Console.WriteLine("\nLista de espera\n");
-                        filaP.Imprimir();
-                        fila.Imprimir();
+                        filaChegadaPreferencial.Imprimir();
+                        filaChegada.Imprimir();
 
                         Console.WriteLine("\nPressione qualquer tecla voltar ao menu principal...");
                         Console.ReadKey();
@@ -71,18 +86,23 @@ namespace ControleCovid
 
                     case "3":
                         Pessoa pP;
-                        if (contador < 2 && !(filaP.Vazia()))
+                        if (contador < 2 && !(filaChegadaPreferencial.Vazia()))
                         {
                             // IDOSO
-                            pP = filaP.Pop();
+                            pP = filaChegadaPreferencial.Pop();
                             CadastrarDoencas(pP);
                             contador++;
                         }
                         else
                         {
-                            pP = fila.Pop();
-                            CadastrarDoencas(pP);
-
+                            StreamReader filaChegadaReader = new StreamReader("filachegada.csv", Encoding.UTF8);
+                            string ler = filaChegadaReader.ReadToEnd();
+                            
+                                pP = filaChegada.Pop();
+                                CadastrarDoencas(pP);
+                                Console.WriteLine(ler);
+                                filaChegadaReader.Close();
+                            
                             // NORMAL
                             contador = 0;
                         }
@@ -90,15 +110,25 @@ namespace ControleCovid
                         switch (pP.fichaDoencas.Status)
                         {
                             case 1: // FILA QUARENTENA
-                                filaQuarentena.Push(pP);
+                                using (StreamWriter filaQuarentenaWriter = new StreamWriter("filaQuarentena.cvs", true))
+                                {
+                                    filaQuarentena.Push(pP);
+                                    filaQuarentenaWriter.WriteLine(pP.ConverterCSV());
+                                }
                                 break;
                             case 2: // FILA INTERNADOS
-                                filaInternado.Push(pP);
-
+                                using (StreamWriter filaInternadoWriter = new StreamWriter("filaInternado.cvs", true))
+                                {
+                                    filaInternado.Push(pP);
+                                    filaInternadoWriter.WriteLine(pP.ConverterCSV());
+                                }
                                 break;
                             case 3: // FILA SEM COVID
-                                filaSemCovid.Push(pP);
-
+                                using (StreamWriter filaSemCovidWriter = new StreamWriter("filaSemCovid.cvs", true))
+                                {
+                                    filaSemCovid.Push(pP);
+                                    filaSemCovidWriter.WriteLine(pP.ConverterCSV());
+                                }
                                 break;
                         }
                         break;

@@ -13,8 +13,8 @@ namespace ControleCovid
         public DateTime DataNascimento { get; set; }
         public long Cpf { get; set; }
         public string Sexo { get; set; }
-        public Pessoa Proximo { get; set; }
         public FichaDoencas fichaDoencas { get; set; }
+        public Pessoa Proximo { get; set; }
 
         public override string ToString()
         {
@@ -29,6 +29,11 @@ namespace ControleCovid
             var age = today.Year - birthdate.Year;
             if (birthdate > today.AddYears(-age)) age--;
             return age;
+        }
+
+        public string ConverterCSV()
+        {
+            return Id + "," + Nome + "," + DataNascimento + "," + Cpf + "," + Sexo;
         }
     }
 }
