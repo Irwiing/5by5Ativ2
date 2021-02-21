@@ -90,6 +90,13 @@ namespace ControleCovid
                 }
             }
         }
+        public void SalvarCSV(string nomeArquivo, Pessoa pessoa)
+        {
+            using (StreamWriter filaWriter = new StreamWriter(nomeArquivo, true))
+            {
+                filaWriter.WriteLine(pessoa.ConverterCSV());
+            }
+        }
         public void SalvarCSV(string nomeArquivo, bool escrita)
         {
             using (StreamWriter filaWriter = new StreamWriter(nomeArquivo, escrita))

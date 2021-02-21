@@ -45,25 +45,30 @@ namespace ControleCovid
                 Head = null,
             };
 
+            FilaChegada relatorio = new FilaChegada
+            {
+                Tail = null,
+                Head = null,
+            };
 
-            filaChegada.SalvarCSV("FilaChegada.csv", true);
-            filaChegada.ConsultarCSV("FilaChegada.csv", true);
-
-
-            filaChegadaPreferencial.SalvarCSV("FilaChegadaPreferencial.csv", true);
-            filaChegadaPreferencial.ConsultarCSV("FilaChegadaPreferencial.csv", true);
-
-
-            filaSemCovid.SalvarCSV("filaSemCovid.csv", true);
-            filaSemCovid.ConsultarCSV("filaSemCovid.csv", false);
+            filaChegada.SalvarCSV("FilaChegada.csv", true); //segundo parametro booleano para não recriar o arquivo
+            filaChegada.ConsultarCSV("FilaChegada.csv", true); //segundo parametro booleano para saber se já tem cadastro de fixa
 
 
-            filaQuarentena.SalvarCSV("filaQuarentena.csv", true);
-            filaQuarentena.ConsultarCSV("filaQuarentena.csv", false);
+            filaChegadaPreferencial.SalvarCSV("FilaChegadaPreferencial.csv", true); ;//segundo parametro booleano para não recriar o arquivo
+            filaChegadaPreferencial.ConsultarCSV("FilaChegadaPreferencial.csv", true);//segundo parametro booleano para saber se já tem cadastro de fixa
 
 
-            filaInternado.SalvarCSV("filaInternado.csv", true);
-            filaInternado.ConsultarCSV("filaInternado.csv", false);
+            filaSemCovid.SalvarCSV("filaSemCovid.csv", true); //segundo parametro booleano para não recriar o arquivo
+            filaSemCovid.ConsultarCSV("filaSemCovid.csv", false);//segundo parametro booleano para saber se já tem cadastro de fixa
+
+
+            filaQuarentena.SalvarCSV("filaQuarentena.csv", true); //segundo parametro booleano para não recriar o arquivo
+            filaQuarentena.ConsultarCSV("filaQuarentena.csv", false);//segundo parametro booleano para saber se já tem cadastro de fixa
+
+
+            filaInternado.SalvarCSV("filaInternado.csv", true);//segundo parametro booleano para não recriar o arquivo
+            filaInternado.ConsultarCSV("filaInternado.csv", false);//segundo parametro booleano para saber se já tem cadastro de fixa
 
 
 
@@ -95,10 +100,10 @@ namespace ControleCovid
                         Console.WriteLine("\t\n----------Lista de espera----------\n");
                         Console.WriteLine(" ---> Fila Preferencial <---\n");
                         filaChegadaPreferencial.Imprimir();
-                        
+
                         Console.WriteLine(" ---> Fila Normal <---\n");
                         filaChegada.Imprimir();
-                        
+
 
                         Console.WriteLine("\nPressione qualquer tecla voltar ao menu principal...");
                         Console.ReadKey();
@@ -111,6 +116,7 @@ namespace ControleCovid
                             // IDOSO
                             pP = filaChegadaPreferencial.Pop();
                             pP = CadastrarDoencas(pP);
+                            pP.Proximo = null;
                             filaChegadaPreferencial.SalvarCSV("FilaChegadaPreferencial.csv");
                             contador++;
                         }
@@ -120,25 +126,28 @@ namespace ControleCovid
 
                             pP = filaChegada.Pop();
                             pP = CadastrarDoencas(pP);
+                            pP.Proximo = null;
+                            
                             filaChegada.SalvarCSV("FilaChegada.csv");
                             contador = 0;
                         }
+
 
                         switch (pP.fichaDoencas.Status)
                         {
                             case 1: // FILA QUARENTENA
                                 filaQuarentena.Push(pP);
-                                pP.SalvarCSV("filaQuarentena.csv");
+                                filaQuarentena.SalvarCSV("filaQuarentena.csv", pP);
                                 break;
                             case 2: // FILA INTERNADOS
 
                                 filaInternado.Push(pP);
-                                pP.SalvarCSV("filaInternado.csv");
+                                filaInternado.SalvarCSV("filaInternado.csv", pP);
 
                                 break;
                             case 3: // FILA SEM COVID
                                 filaSemCovid.Push(pP);
-                                pP.SalvarCSV("filaSemCovid.csv");
+                                filaSemCovid.SalvarCSV("filaSemCovid.csv", pP);
                                 break;
                         }
                         break;
@@ -169,12 +178,43 @@ namespace ControleCovid
 
                     case "6":
 
-                        break;
+                        while (!filaInternado.Vazia())
+                        {
+                            Pessoa pessoa = filaInternado.Pop();
+                            filaInternado.SalvarCSV("filaInternado.csv");
+                            relatorio.Push(pessoa);
+                        }
 
+
+                        while (!filaQuarentena.Vazia())
+                        {
+                            Pessoa pessoa = filaQuarentena.Pop();
+                            filaQuarentena.SalvarCSV("filaQuarentena.csv");
+                            relatorio.Push(pessoa);
+                        }
+
+
+                        while (!filaSemCovid.Vazia())
+                        {
+                            Pessoa pessoa = filaSemCovid.Pop();
+                            filaSemCovid.SalvarCSV("filaSemCovid.csv");
+                            relatorio.Push(pessoa);
+                        }
+
+                        relatorio.SalvarCSV("Relatorio.csv");
+                        relatorio = new FilaChegada();
+                        relatorio.ConsultarCSV("Relatorio.csv", false);
+                        Console.Clear();
+                        Console.WriteLine(" ---> Relatorio de Consultas <--- ");
+                        relatorio.Imprimir();
+
+                        Console.WriteLine("\nPressione qualquer tecla voltar ao menu principal...");
+                        Console.ReadKey();
+                        break;
                 }
 
             } while (escolha != "0");
-                       
+
         }
 
         static string MenuFilaChegada()
@@ -189,7 +229,6 @@ namespace ControleCovid
                               "\n4)Mostrar fila com pacientes com Covid-19" +
                               "\n5)Mostrar fila com pacientes sem Covid 19" +
                               "\n6)Relatório" +
-                              "\n7)Procurar Pessoas por ID: (EM MANUTENÇÃO)" +
                               "\n0)Sair do programa!");
             escolha = Console.ReadLine();
             return escolha;
@@ -212,7 +251,7 @@ namespace ControleCovid
             cpf = long.Parse(Console.ReadLine());
             Console.WriteLine("Informe a data de nascimento do paciente: ");
             data_nascimento = DateTime.Parse(Console.ReadLine());
-
+            
             return new Pessoa
             {
                 Id = id,
@@ -223,11 +262,11 @@ namespace ControleCovid
             };
         }
 
-        static Pessoa CadastrarDoencas(Pessoa p)
+        static Pessoa CadastrarDoencas(Pessoa pessoa)
         {
             int diasSintomas, status;
-
-            Console.WriteLine(p.ToString() + "\n");
+            Console.Clear();
+            Console.WriteLine(pessoa.ToString() + "\n");
 
             Console.WriteLine("A quantos dias o paciente percebeu os sintomas: ");
             diasSintomas = int.Parse(Console.ReadLine());
@@ -253,7 +292,7 @@ namespace ControleCovid
                               "\n3)Sem Covid-19 ");
             status = int.Parse(Console.ReadLine());
 
-            p.fichaDoencas = new FichaDoencas
+            pessoa.fichaDoencas = new FichaDoencas
             {
                 agravante = new Agravante
                 {
@@ -266,7 +305,7 @@ namespace ControleCovid
                 DiasSintomas = diasSintomas,
                 Status = status
             };
-            return p;
+            return pessoa;
 
         }
     }
