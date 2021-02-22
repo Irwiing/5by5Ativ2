@@ -19,3 +19,10 @@ C:\Users\Irwilha\Documents\LearnSpace\ControleCovid\ControleCovid\obj\Debug\Cont
 C:\Users\Irwilha\Documents\LearnSpace\ControleCovid\ControleCovid\obj\Debug\ControleCovid.csproj.CoreCompileInputs.cache
 C:\Users\Irwilha\Documents\LearnSpace\ControleCovid\ControleCovid\obj\Debug\ControleCovid.exe
 C:\Users\Irwilha\Documents\LearnSpace\ControleCovid\ControleCovid\obj\Debug\ControleCovid.pdb
+C:\Users\Vitor Faccio\Desktop\5by5Ativ2\ControleCovid\bin\Debug\ControleCovid.exe.config
+C:\Users\Vitor Faccio\Desktop\5by5Ativ2\ControleCovid\bin\Debug\ControleCovid.exe
+C:\Users\Vitor Faccio\Desktop\5by5Ativ2\ControleCovid\bin\Debug\ControleCovid.pdb
+C:\Users\Vitor Faccio\Desktop\5by5Ativ2\ControleCovid\obj\Debug\ControleCovid.csprojAssemblyReference.cache
+C:\Users\Vitor Faccio\Desktop\5by5Ativ2\ControleCovid\obj\Debug\ControleCovid.csproj.CoreCompileInputs.cache
+C:\Users\Vitor Faccio\Desktop\5by5Ativ2\ControleCovid\obj\Debug\ControleCovid.exe
+C:\Users\Vitor Faccio\Desktop\5by5Ativ2\ControleCovid\obj\Debug\ControleCovid.pdb
