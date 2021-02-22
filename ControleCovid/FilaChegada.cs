@@ -56,8 +56,6 @@ namespace ControleCovid
                 Cont--;
             }
             return aux;
-
-
         }
 
         public void Imprimir()

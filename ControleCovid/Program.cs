@@ -109,7 +109,7 @@ namespace ControleCovid
                         Console.ReadKey();
                         break;
 
-                    case "3":                   
+                    case "3":
 
                         Pessoa pP;
                         if (contador < 2 && !(filaChegadaPreferencial.Vazia()))
@@ -121,7 +121,7 @@ namespace ControleCovid
                             filaChegadaPreferencial.SalvarCSV("FilaChegadaPreferencial.csv");
                             contador++;
                         }
-                        else
+                        else if (!filaChegada.Vazia())
                         {
                             // NORMAL
 
@@ -131,6 +131,10 @@ namespace ControleCovid
 
                             filaChegada.SalvarCSV("FilaChegada.csv");
                             contador = 0;
+                        }
+                        else
+                        {
+                            break;
                         }
 
 
@@ -270,12 +274,12 @@ namespace ControleCovid
             int diasSintomas, status;
             bool diabetes, fumante, hipertensao, problemasRespiratorios, obesidade;
             Console.Clear();
-            
+
             Console.WriteLine(pessoa.ToString() + "\n");
 
             Console.WriteLine("A quantos dias o paciente percebeu os sintomas: ");
             diasSintomas = int.Parse(Console.ReadLine());
-
+            
             Console.WriteLine("O paciente possui diabetes? 0(Não) ou 1(Sim): ");
             diabetes = int.Parse(Console.ReadLine()) == 0 ? false : true;
 
@@ -298,8 +302,8 @@ namespace ControleCovid
                               "\n2)Internados" +
                               "\n3)Sem Covid-19 ");
                 status = int.Parse(Console.ReadLine());
-            } while (status != 1 && status != 2 && status != 3 );
-            
+            } while (status != 1 && status != 2 && status != 3);
+
 
             pessoa.fichaDoencas = new FichaDoencas
             {
@@ -312,10 +316,10 @@ namespace ControleCovid
                     Obesidade = obesidade
                 },
                 DiasSintomas = diasSintomas,
-                Status = status                
+                Status = status
             };
 
-         
+
 
             return pessoa;
 
