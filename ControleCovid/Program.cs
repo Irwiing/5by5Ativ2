@@ -109,7 +109,8 @@ namespace ControleCovid
                         Console.ReadKey();
                         break;
 
-                    case "3":
+                    case "3":                   
+
                         Pessoa pP;
                         if (contador < 2 && !(filaChegadaPreferencial.Vazia()))
                         {
@@ -127,7 +128,7 @@ namespace ControleCovid
                             pP = filaChegada.Pop();
                             pP = CadastrarDoencas(pP);
                             pP.Proximo = null;
-                            
+
                             filaChegada.SalvarCSV("FilaChegada.csv");
                             contador = 0;
                         }
@@ -249,9 +250,11 @@ namespace ControleCovid
             sexo = Console.ReadLine();
             Console.WriteLine("Informe o CPF do paciente: ");
             cpf = long.Parse(Console.ReadLine());
-            Console.WriteLine("Informe a data de nascimento do paciente: ");
+            Console.WriteLine("Informe a data de nascimento do paciente (xx/xx/xxxx): ");
             data_nascimento = DateTime.Parse(Console.ReadLine());
-            
+
+
+
             return new Pessoa
             {
                 Id = id,
@@ -265,32 +268,38 @@ namespace ControleCovid
         static Pessoa CadastrarDoencas(Pessoa pessoa)
         {
             int diasSintomas, status;
+            bool diabetes, fumante, hipertensao, problemasRespiratorios, obesidade;
             Console.Clear();
+            
             Console.WriteLine(pessoa.ToString() + "\n");
 
             Console.WriteLine("A quantos dias o paciente percebeu os sintomas: ");
             diasSintomas = int.Parse(Console.ReadLine());
 
             Console.WriteLine("O paciente possui diabetes? 0(Não) ou 1(Sim): ");
-            bool diabetes = int.Parse(Console.ReadLine()) == 0 ? false : true;
+            diabetes = int.Parse(Console.ReadLine()) == 0 ? false : true;
 
             Console.WriteLine("O paciente fuma? 0(Não) ou 1(Sim): ");
-            bool fumante = int.Parse(Console.ReadLine()) == 0 ? false : true;
+            fumante = int.Parse(Console.ReadLine()) == 0 ? false : true;
 
             Console.WriteLine("O paciente possui hipertensao 0(Não) ou 1(Sim): ");
-            bool hipertensao = int.Parse(Console.ReadLine()) == 0 ? false : true;
+            hipertensao = int.Parse(Console.ReadLine()) == 0 ? false : true;
 
             Console.WriteLine("O paciente possui problemas respiratorios 0(Não) ou 1(Sim): ");
-            bool problemasRespiratorios = int.Parse(Console.ReadLine()) == 0 ? false : true;
+            problemasRespiratorios = int.Parse(Console.ReadLine()) == 0 ? false : true;
 
             Console.WriteLine("O paciente possui obesidade 0(Não) ou 1(Sim): ");
-            bool obesidade = int.Parse(Console.ReadLine()) == 0 ? false : true;
+            obesidade = int.Parse(Console.ReadLine()) == 0 ? false : true;
 
-            Console.WriteLine("Qual fila o paciente será mandado " +
+            do
+            {
+                Console.WriteLine("\nQual fila o paciente será mandado " +
                               "\n1)Quarentena" +
                               "\n2)Internados" +
                               "\n3)Sem Covid-19 ");
-            status = int.Parse(Console.ReadLine());
+                status = int.Parse(Console.ReadLine());
+            } while (status != 1 && status != 2 && status != 3 );
+            
 
             pessoa.fichaDoencas = new FichaDoencas
             {
@@ -303,8 +312,11 @@ namespace ControleCovid
                     Obesidade = obesidade
                 },
                 DiasSintomas = diasSintomas,
-                Status = status
+                Status = status                
             };
+
+         
+
             return pessoa;
 
         }

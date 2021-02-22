@@ -20,7 +20,7 @@ namespace ControleCovid
 
         public override string ToString()
         {
-            return $"DADOS PESSOA\nId: {Id}\nNome: {Nome}\nData Nascimento:  {DataNascimento} " +
+            return $"DADOS PESSOA\nId: {Id}\nNome: {Nome}\nData Nascimento:  {DataNascimento.ToString("dd/MM/yyyy")} " +
                 $"\nCPF: {Cpf}\nSexo: {Sexo}{fichaDoencas}";
         }
 
