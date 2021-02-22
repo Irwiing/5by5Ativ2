@@ -8,16 +8,16 @@
 
 ![Covid.gif](https://github.com/Irwiing/5by5Ativ2/blob/master/Covid.gif)
 
-A primeira tela mostrará um menu com 7 opções, sendo a "primeira" para cadastrar o paciente com o nome, a data de nascimento, o CPF, o gênero e o ID. A partir deste cadastro saberemos a idade do paciente e redirecionaremos na fila preferencial ou a fila convencional.
-A opção  " dois "  mostra todas as pessoas que estão na fila de espera.
-Na opção "três", quando o medico escolhe essa opção , será chamado uma sequencia de 2 idosos e 1 não idoso. Na ficha de cadastro o medico irá atribuir quantos dias o paciente percebeu os sintomas , quais doenças ele possui, e para onde ele será mandado
-A "quarta" opção mostra todas as pessoas cadastradas que possui covid, e a "quinta" opção as pessoas cadastradas que deram negativo para Covid.
-Na "sexta" opção temos o relatório de todos os cadastros para futuramente se a pessoa retornar teremos os dados dela.
+A primeira tela mostrará um menu com 7 opções, sendo a  primeira  para cadastrar o paciente com o nome, a data de nascimento, o CPF, o gênero e o ID. A partir deste cadastro saberemos a idade do paciente e redirecionaremos na fila preferencial ou a fila convencional.
+A opção  dois  mostra todas as pessoas que estão na fila de espera.
+Na opção três , quando o medico escolhe essa opção , será chamado uma sequencia de 2 idosos e 1 não idoso. Na ficha de cadastro o medico irá atribuir quantos dias o paciente percebeu os sintomas , quais doenças ele possui, e para onde ele será mandado
+A quarta opção mostra todas as pessoas cadastradas que possui covid, e a quinta opção as pessoas cadastradas que deram negativo para Covid.
+Na  sexta opção temos o relatório de todos os cadastros para futuramente se a pessoa retornar teremos os dados dela.
 
 
 ##  :computer::computer_mouse: Para Utilizar
 
- - Faça o clone do repositório https://github.com/Irwiing/5by5Ativ2/tree/master/ControleCovid
+ - Faça o clone do repositório https://github.com/Irwiing/5by5Ativ2
  - Após terminado entre até a pasta debug https://github.com/Irwiing/5by5Ativ2/blob/master/ControleCovid/bin/Debug/ControleCovid.exe
  - Para executar basta entrar com o comando basta entrar na pasta download do seu computador, clicar no arquivo ControleCovid. 
 
